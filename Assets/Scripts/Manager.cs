@@ -10,6 +10,10 @@ public class Manager : MonoBehaviour
     public string[] attributes;
     public string[] typeOfAttribute;
 
+    public bool datasetReady;
+
+    public GameObject activeTarget = null;
+
     public string GetUrlPath()
     {
         return url_path;
@@ -48,5 +52,25 @@ public class Manager : MonoBehaviour
     public void SetTypeOfAttribute(string[] data)
     {
         typeOfAttribute = data;
+    }
+     //Checks if user already selected a dataset
+    public bool GetDatasetStatus()
+    {
+        return datasetReady;
+    }
+
+    public void SetDatasetStatus(bool status)
+    {
+        datasetReady = status;
+    }
+
+    public GameObject GetActiveImageTarget()
+    {
+        return activeTarget;
+    }
+
+    public void SetActiveImageTarget(GameObject target)
+    {
+        activeTarget = target;
     }
 }

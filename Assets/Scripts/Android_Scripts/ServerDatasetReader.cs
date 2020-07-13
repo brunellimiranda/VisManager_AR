@@ -49,6 +49,7 @@ public class ServerDatasetReader : DefaultTrackableEventHandler
     protected override void OnTrackingFound()
     {
         base.OnTrackingFound();
+        GameObject.Find("LogicManager").GetComponent<Manager>().SetActiveImageTarget(this.gameObject);
         //print("track: " + this.gameObject.GetComponent<TrackableBehaviour>().CurrentStatus);
         if (!isActive(grid))
         {
@@ -62,6 +63,7 @@ public class ServerDatasetReader : DefaultTrackableEventHandler
         //}
     }
 
+    //protected override 
     protected override void OnTrackingLost()
     {
         base.OnTrackingLost();

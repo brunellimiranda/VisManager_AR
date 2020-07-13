@@ -22,7 +22,7 @@ public class ReticleSelectionBehaviour : MonoBehaviour
     private string newDatasetName;
 
     private float timer = 0.0f;
-    private float dwellTime = 3.0f;
+    private float dwellTime = 1.5f;
 
     private string requestDataset;
     private string requestServerPath;
@@ -31,9 +31,12 @@ public class ReticleSelectionBehaviour : MonoBehaviour
     private string[] typeOfAttributes;
     private string[] firstRowData;
 
+    private Manager localManager;
+
     private void Awake()
     {
         center = new Vector2((Screen.width / 2), (Screen.height/2));
+        localManager = GameObject.Find("LogicManager").GetComponent<Manager>();
     }
 
     private void Update()
@@ -44,23 +47,26 @@ public class ReticleSelectionBehaviour : MonoBehaviour
         
         if(Physics.Raycast(ray, out hit))
         {
-            newDatasetName = hit.transform.GetChild(0).transform.GetComponent<TextMeshPro>().text;
-            if(previousDatasetName != null)
+            if (hit.transform.parent.tag == "AR Object")
             {
-                if(previousDatasetName == newDatasetName)
+                newDatasetName = hit.transform.GetChild(0).transform.GetComponent<TextMeshPro>().text;
+                if (previousDatasetName != null)
                 {
-                    timer += Time.deltaTime;
-                    if(timer > dwellTime)
+                    if (previousDatasetName == newDatasetName)
                     {
-                        GameObject.Find("LogicManager").GetComponent<Manager>().SetDatasetLoaded(newDatasetName);
-                        timer = 0;
-                        requestDataset = GameObject.Find("LogicManager").GetComponent<Manager>().GetDatasetLoaded();
-                        requestServerPath = GameObject.Find("LogicManager").GetComponent<Manager>().GetUrlPath();
-                        string request1 = requestServerPath + "/attributes/" + requestDataset;
-                        print("Resquest 1: " + request1);
-                        StartCoroutine(GetRequest(request1, 0));
-                        string request2 = requestServerPath + "/row/" + requestDataset + "/0";
-                        StartCoroutine(GetRequest(request2, 1));
+                        timer += Time.deltaTime;
+                        if (timer > dwellTime)
+                        {
+                            localManager.SetDatasetLoaded(newDatasetName);
+                            timer = 0;
+                            requestDataset = localManager.GetDatasetLoaded();
+                            requestServerPath = localManager.GetUrlPath();
+                            string request1 = requestServerPath + "/attributes/" + requestDataset;
+                            print("Resquest 1: " + request1);
+                            StartCoroutine(GetRequest(request1, 0));
+                            string request2 = requestServerPath + "/row/" + requestDataset + "/0";
+                            StartCoroutine(GetRequest(request2, 1));
+                        }
                     }
                 }
             }
@@ -95,11 +101,8 @@ public class ReticleSelectionBehaviour : MonoBehaviour
     private void GetWWWAttributes(string base64str)
     {
         attributes = base64str.ToString().Split(","[0]);
-
-        //for (int i = 0; i < attributes.Length; i++)
-        //{
-        //    print("attr[" + i + "]: " + attributes[i]);
-        //}
+        localManager.SetAttributes(attributes);
+        
     }
 
     private void GetWWWFirstLine(string base64str)
@@ -119,8 +122,10 @@ public class ReticleSelectionBehaviour : MonoBehaviour
             {
                 typeOfAttributes[i] = "CAT";
             }
-            print("Att[" + i + "]_type: " + typeOfAttributes[i]);
             i++;
         }
+
+        localManager.SetTypeOfAttribute(typeOfAttributes);
+        localManager.SetDatasetStatus(true);
     }
 }

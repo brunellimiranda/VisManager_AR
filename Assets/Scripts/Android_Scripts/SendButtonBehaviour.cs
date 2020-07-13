@@ -6,6 +6,12 @@ using UnityEngine.Networking;
 using System;
 using System.Text;
 
+/// <summary>
+/// Script for behaviour of send button located on ARCamera --> Canvas
+/// For quick tests purpose, bypass this by deactivating the canvas gameobject in the hierarchy
+///     and inputing "http://localhost:3000" in LogicManager -> Manager.cs --> Url_Path public field in the inspector
+/// </summary>
+
 public class SendButtonBehaviour : MonoBehaviour
 {
     public GameObject canvasI;

@@ -64,8 +64,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Prefabs\Min Max Slider\MinMaxSlider.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\AmbientLightManager.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\AntiFlickering.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\AR_ChartGenerator.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\AreaChart.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\BarChart.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\LineChart.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\LockPositionOfImageTarget.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\PieChart.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\ReticleSelectionBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\ScatterPlot.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\SendButtonBehaviour.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\ServerDatasetReader.cs" />
     <Compile Include="Assets\Scripts\DatasetReader.cs" />

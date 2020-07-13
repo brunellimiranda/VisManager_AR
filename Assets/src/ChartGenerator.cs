@@ -136,11 +136,11 @@ public class ChartGenerator : MonoBehaviour
         if (verifyparameters()) {
             string url = "";
             if (Datatype == DataType.Manual)
-                //url = "http://localhost:3000/chartgen.html?x=" + x + "&y=" + y + "&chart=" + Charttype.ToString().ToLower();
-                url =  subdomain_url + "chartgen.html?x=" + x + "&y=" + y + "&chart=" + Charttype.ToString().ToLower();
-            else 
-                //url = "http://localhost:3000/generate/" + dataset_name + "/chartgen.html?x=" + x + "&y=" + y + "&chart=" + Charttype.ToString().ToLower();
-                url = subdomain_url + "generate/" + dataset_name + "/chartgen.html?x=" + x + "&y=" + y + "&chart=" + Charttype.ToString().ToLower();
+                url = "http://localhost:3000/chartgen.html?x=" + x + "&y=" + y + "&chart=" + Charttype.ToString().ToLower();
+            //url =  subdomain_url + "chartgen.html?x=" + x + "&y=" + y + "&chart=" + Charttype.ToString().ToLower();
+            else
+                url = "http://localhost:3000/generate/" + dataset_name + "/chartgen.html?x=" + x + "&y=" + y + "&chart=" + Charttype.ToString().ToLower();
+            //url = subdomain_url + "generate/" + dataset_name + "/chartgen.html?x=" + x + "&y=" + y + "&chart=" + Charttype.ToString().ToLower();
 
             if (maxdimensions() > 2)
                 url += "&z=" + z;
