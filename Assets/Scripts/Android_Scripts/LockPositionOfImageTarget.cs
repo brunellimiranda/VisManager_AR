@@ -18,28 +18,28 @@ public class LockPositionOfImageTarget : MonoBehaviour
 
     private void Update()
     {
-        activeTarget = localManager.GetActiveImageTarget();
-        if (previousActiveTarget != null)
-        {
-            if (previousActiveTarget != activeTarget)
-            {
-                lockedPositions.Set(activeTarget.transform.position.x, activeTarget.transform.position.y, activeTarget.transform.position.z);
-                previousActiveTarget = activeTarget;
-            }
-            //here we mantain the target initial transform position locked
-            else
-            {
-                activeTarget.transform.position = lockedPositions;
-            }
-        }
-        else
-        {
-            if(activeTarget != null)
-            {
-                lockedPositions.Set(activeTarget.transform.position.x, activeTarget.transform.position.y, activeTarget.transform.position.z);
-            }
+        //activeTarget = localManager.GetActiveImageTarget();
+        //if (previousActiveTarget != null)
+        //{
+        //    if (previousActiveTarget != activeTarget)
+        //    {
+        //        lockedPositions.Set(activeTarget.transform.position.x, activeTarget.transform.position.y, activeTarget.transform.position.z);
+        //        previousActiveTarget = activeTarget;
+        //    }
+        //    //here we mantain the target initial transform position locked
+        //    else
+        //    {
+        //        activeTarget.transform.position = lockedPositions;
+        //    }
+        //}
+        //else
+        //{
+        //    if(activeTarget != null)
+        //    {
+        //        lockedPositions.Set(activeTarget.transform.position.x, activeTarget.transform.position.y, activeTarget.transform.position.z);
+        //    }
             
-            previousActiveTarget = activeTarget;
-        }
+        //    previousActiveTarget = activeTarget;
+        //}
     }
 }

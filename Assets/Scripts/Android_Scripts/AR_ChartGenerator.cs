@@ -8,7 +8,8 @@ using System.Linq;
 public class AR_ChartGenerator : MonoBehaviour
 {
     string sender = null;
-    GameObject senderObj = null;
+    //GameObject senderChild;
+    //Transform senderChild;
 
    public void GetChart(string path, string dataset, string xAxis, string yAxis, string vis, string senderObj)
     {
@@ -21,6 +22,20 @@ public class AR_ChartGenerator : MonoBehaviour
         
         StartCoroutine(GetRequest(url));
     }
+
+    public void GetChart(string path, string dataset, string xAxis, string yAxis, string zAxis, string vis, string senderObj)
+    {
+        sender = senderObj;
+        string url = "";
+        url = path + "/generate/" + dataset + "/chartgen.html?x=" +
+            xAxis + "&y=" + yAxis + "&z=" + zAxis + "&chart=" + vis + "&title=" + dataset;
+
+        print("Requisition: " + url);
+
+        StartCoroutine(GetRequest(url));
+    }
+
+
 
     IEnumerator GetRequest(string uri)
     {
@@ -45,26 +60,25 @@ public class AR_ChartGenerator : MonoBehaviour
         Rect rect = new Rect(0, 0, tex.width, tex.height);
         Sprite sprite = Sprite.Create(tex, rect, new Vector2(0, 0), 100f);
 
-        senderObj = GameObject.Find(sender);
-        var child = senderObj.transform.GetChild(0);
-        SpriteRenderer renderer = child.GetComponent<SpriteRenderer>();
-        //SpriteRenderer renderer = this.gameObject.GetComponent<SpriteRenderer>();
+        var senderChild = this.gameObject;
+
+        SpriteRenderer renderer = senderChild.GetComponent<SpriteRenderer>();
+
         if (renderer == null)
         {
-            renderer = child.gameObject.AddComponent<SpriteRenderer>();
-            //renderer = this.gameObject.AddComponent<SpriteRenderer>();
+            renderer = senderChild.gameObject.AddComponent<SpriteRenderer>();
+
         }
         renderer.sprite = sprite;
 
-        PolygonCollider2D collider = child.GetComponent<PolygonCollider2D>();
-        //PolygonCollider2D collider = gameObject.GetComponent<PolygonCollider2D>();
-        if(collider == null)
+        PolygonCollider2D collider = senderChild.GetComponent<PolygonCollider2D>();
+
+        if (collider == null)
         {
-            child.gameObject.AddComponent<PolygonCollider2D>();
-            //gameObject.AddComponent<PolygonCollider2D>();
+            senderChild.gameObject.AddComponent<PolygonCollider2D>();
+
         }
 
-        //child.gameObject.transform.localPosition = new Vector3(0,0,0);
-        print("Chegou no fim do generateViz");
+
     }
 }

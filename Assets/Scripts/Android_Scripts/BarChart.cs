@@ -7,12 +7,12 @@ public class BarChart : DefaultTrackableEventHandler
 {
     public Manager localManager;
     private string serverPath;
-    private string dataseName;
+    private string datasetName;
     private string[] datasetAtt;
     private string[] datasetTypeOfAtt;
 
-    private string default_X = null;
-    private string default_Y = null;
+    private string default_X = "";
+    private string default_Y = "";
 
     private void Awake()
     {
@@ -22,21 +22,24 @@ public class BarChart : DefaultTrackableEventHandler
     protected override void OnTrackingFound()
     {
         base.OnTrackingFound();
-        var tempPreviousTarget = localManager.GetActiveImageTarget();
+        //var tempPreviousTarget = localManager.GetActiveImageTarget();
 
-        if (tempPreviousTarget != this.gameObject && tempPreviousTarget.tag != "Visualization")
-        {
-            //does not work when more than 1 card is tracked at the same time
-            tempPreviousTarget.transform.GetChild(0).gameObject.SetActive(false);
-        }
+        //if (tempPreviousTarget != this.gameObject && tempPreviousTarget.tag != "Visualization")
+        //{
+        //    //does not work when more than 1 card is tracked at the same time
+        //    tempPreviousTarget.transform.GetChild(0).gameObject.SetActive(false);
+        //}
 
-        //teste
-        GameObject.Find("LogicManager").GetComponent<Manager>().SetActiveImageTarget(this.gameObject);
+        ////teste
+        //GameObject.Find("LogicManager").GetComponent<Manager>().SetActiveImageTarget(this.gameObject);
 
         serverPath = localManager.GetUrlPath();
-        dataseName = localManager.GetDatasetLoaded();
-
-        SetDefaultAxis();
+        datasetName = localManager.GetDatasetLoaded();
+        if (!string.IsNullOrEmpty(localManager.GetDatasetLoaded()))
+        {
+            
+            SetDefaultAxis();
+        }
     }
 
     protected override void OnTrackingLost()
@@ -70,7 +73,7 @@ public class BarChart : DefaultTrackableEventHandler
         print("X: " + default_X);
         print("Y: " + default_Y);
 
-        GameObject.Find("LogicManager").GetComponent<AR_ChartGenerator>().GetChart(serverPath, dataseName, default_X, default_Y, "barchartvertical",
+        this.transform.GetChild(0).GetComponent<AR_ChartGenerator>().GetChart(serverPath, datasetName, default_X, default_Y, "barchartvertical",
             this.gameObject.name);
     }
 }

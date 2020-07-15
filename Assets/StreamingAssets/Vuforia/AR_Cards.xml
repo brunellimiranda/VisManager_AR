@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
-    <ImageTarget name="Umiiruka" size="0.060000 0.088500" />
-    <ImageTarget name="SolomonsLawbook" size="0.060000 0.087568" />
-    <ImageTarget name="Gamble" size="0.060000 0.086195" />
-    <ImageTarget name="Gust" size="0.060000 0.087000" />
-    <ImageTarget name="ShadowOfEyes" size="0.060000 0.087273" />
-    <ImageTarget name="DarkZebra" size="0.060000 0.087009" />
-    <ImageTarget name="TheAllSeeingWhiteTiger" size="0.060000 0.087000" />
-    <ImageTarget name="MessengerofPeace2" size="0.060000 0.087421" />
+    <ImageTarget name="ShieldSword1" size="0.060000 0.087379" />
+    <ImageTarget name="DragonTreasure" size="0.060000 0.087379" />
+    <ImageTarget name="TwoProngedAttack" size="0.060000 0.087122" />
+    <ImageTarget name="Fake-Trap" size="0.060000 0.083624" />
+    <ImageTarget name="CastleWalls" size="0.060000 0.088757" />
+    <ImageTarget name="Reinforcements" size="0.060000 0.087882" />
+    <ImageTarget name="FlameSwordsman" size="0.060000 0.087506" />
+    <ImageTarget name="RemoveTrap" size="0.060000 0.087706" />
+    <ImageTarget name="MonsterReborn" size="0.060000 0.087538" />
+    <ImageTarget name="DeSpell" size="0.060000 0.087353" />
     <ImageTarget name="BabyDragon" size="0.060000 0.085500" />
-    <ImageTarget name="RisingAirCurrent" size="0.060000 0.089700" />
     <ImageTarget name="thousandDragon" size="0.060000 0.083077" />
-    <ImageTarget name="Gradius2" size="0.060000 0.060000" />
-    <ImageTarget name="coldwave2" size="0.060000 0.087800" />
     <ImageTarget name="KarateMan" size="0.060000 0.087000" />
     <ImageTarget name="timeWizard_card" size="0.060000 0.087042" />
   </Tracking>

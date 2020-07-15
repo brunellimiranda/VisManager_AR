@@ -16,10 +16,10 @@ MonoBehaviour:
     vuforiaLicenseKey: Ad+zzE//////AAABmXXJlwx7+0HtsqJCF/3jGZIJ48scQTiYdDixiAv2MmSgzhGVDw3/lQUuOuiI0kD0jBD1K7oTZ36022fO5igKNGul1u/TbYbtziPF0J+Si+CrZAYPQmkz+xJ6Hk3s526gxAXFXaCMdoNp3dxRualfiFkmaWfE8/Zhl+WxAk0r9WjKrzNSQK7/55xOeKMviU8agNR+0AVFFrGg6EuGoXQM0M3GkLyTz9HM37kSMrwN0R9hzhKIAUf2lZGjZ9qw+YIUNpvooRXbqGw56MiJbgf1MGwN4GwW+vqnugXbtGvOxXC2O1CFP7rTm+O7sm6GpqE0sQJipgfcyUdkDLF0AyRl7yapNBO6nNcFEXZbbgxB7/V7
     ufoLicenseKey: QVJjQ1JZVC8vLy8vQUFBQUtJd2JiaGJFemtHRWgzZWZTTUFqak1FdndoWnc5QTVNcjVCc2N4SzJtcGdXV3lqWXM1ZkdqcDlCVk1ablJ5ZVJjWDdmeVJqZzdTbTVkWjlLZVo1anB0UmdiVzE0dlpYTGxUeU9KcWFkQ1VXK253MTZ2RjBqTlZEMGxHdEt2b3VUR0tmcFp5dFB3aUlwU0MyUUhaZk9ZY0lTbmpUYWFKQ1FzanpySlZZZyt0MDdQYUlaZVJyQUx1Rk5GbzRoSkU2bUU2Q0ZFNUlQMFdBN1VlUjhSY2hCb3BpbDZVT3FBMVNHdUV5N3Y1Mk13Yk5kaDdKZlU3Nmo5YnFXbU1GTGx3OU1ZZitmdGZlelRQaHhtRjhmUkl6TllQWHFWOEZEQkx0d2F2Uk9oejl0T2ZRL3ZvWnJ0UERNZTV2K2NqL2pLb0EvRkc5dXpraUNlRnBGTkFsY21FVDdDd0QwcnZud1RBQTZib1ZxZFJpY1I0ci8=
     delayedInitialization: 0
-    cameraDeviceModeSetting: -3
-    maxSimultaneousImageTargets: 10
-    maxSimultaneousObjectTargets: 1
-    useDelayedLoadingObjectTargets: 0
+    cameraDeviceModeSetting: -1
+    maxSimultaneousImageTargets: 5
+    maxSimultaneousObjectTargets: 5
+    useDelayedLoadingObjectTargets: 1
     modelTargetRecoWhileExtendedTracked: 1
     version: 8.3.8
     eulaAcceptedVersions: '{"Values":["8.3"]}'

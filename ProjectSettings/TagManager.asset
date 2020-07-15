@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - AR Object
   - Visualization
+  - LoadDataset_Item
   layers:
   - Default
   - TransparentFX

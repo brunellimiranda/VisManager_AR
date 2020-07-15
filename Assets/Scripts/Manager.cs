@@ -5,14 +5,14 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     public string url_path;
-    public string datasetLoaded;
+    public string datasetLoaded = "";
 
     public string[] attributes;
     public string[] typeOfAttribute;
 
     public bool datasetReady;
 
-    public GameObject activeTarget = null;
+    //public GameObject activeTarget = null;
 
     public string GetUrlPath()
     {
@@ -64,13 +64,13 @@ public class Manager : MonoBehaviour
         datasetReady = status;
     }
 
-    public GameObject GetActiveImageTarget()
-    {
-        return activeTarget;
-    }
+    //public GameObject GetActiveImageTarget()
+    //{
+    //    return activeTarget;
+    //}
 
-    public void SetActiveImageTarget(GameObject target)
-    {
-        activeTarget = target;
-    }
+    //public void SetActiveImageTarget(GameObject target)
+    //{
+    //    activeTarget = target;
+    //}
 }
