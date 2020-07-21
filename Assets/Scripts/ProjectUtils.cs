@@ -39,8 +39,37 @@ public class ProjectUtils : MonoBehaviour
 
         return attributes;
     }
+    
+    public List<string> GetAttributes(string[] attList)
+    {
+        List<string> attributes = new List<string>();
 
+        foreach (string a in attList)
+        {
+            if (!attributes.Contains(a))
+                attributes.Add(a);
+        }
 
+        return attributes;
+    }
+
+    public List<string> GetAttributes(string row)
+    {
+        List<string> categoricAttributes = new List<string>();
+        string[] attributes = row.Split(',');
+        
+        foreach (string cat in attributes)
+        {
+            if (!categoricAttributes.Contains(cat))
+                categoricAttributes.Add(cat);
+        }
+
+        
+        return categoricAttributes;
+    }
+    
+    
+    
     public List<string> GetCategoricAttributes(List<Type> tipos, List<string> labels)
     {
         List<string> onlyCategoric = new List<string>();
@@ -52,7 +81,7 @@ public class ProjectUtils : MonoBehaviour
 
         return onlyCategoric;
     }
-    
+
     public List<string> GetContinuumAtributes(List<Type> tipos, List<string> labels)
     {
         List<string> onlyContinuum = new List<string>();

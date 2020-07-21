@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/Brunelli/Desktop/Teste003.apk
+C:/Users/Vinicius Queiroz/Desktop/cardvis.apk
 SceneListBegin?
 Assets/Scenes/RA_test.unity
 SceneListEnd?
@@ -55,8 +55,6 @@ aa165095bcf0f4d99594ea33df01c81b UnityEngine.UI.dll:UnityEngine.UI.Slider
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 d3c76b14a25eebd3a3323dd43297919c Unity.TextMeshPro.dll:TMPro.TMP_InputField
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 507174d46dacbc5fe45e28485db5dd1e UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -118,7 +116,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 71bb6a6b6c8f052f948db64c7dd3ca4f VuforiaScripts.dll:.DefaultInitializationErrorHandler
-48d7d5c9c473a7354d886739cd119362 Assembly-CSharp.dll:.Manager
+0aaf4c442f2b77c08eb1ea7f4bf4299f Assembly-CSharp.dll:.Manager
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 f0fb7bb9d146454e388c60390de776a0 Assembly-CSharp.dll:.LockPositionOfImageTarget
 422ae12d24ca2975b79d3ed3075fc422 Assembly-CSharp.dll:.VisualizationManager
@@ -192,12 +190,13 @@ fbbf64dcbe0662e3eda1dec45ea8f895 Vuforia.UnityExtensions.dll:Vuforia.WireframeBe
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ColorChangeScene2
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GenerateWithoutPrefab
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.PieChart
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.AreaChart
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ScatterPlot
+c666afc18982fa2ff699ae61a3d4b7db Assembly-CSharp.dll:.PieChart
+c666afc18982fa2ff699ae61a3d4b7db Assembly-CSharp.dll:.AreaChart
+c666afc18982fa2ff699ae61a3d4b7db Assembly-CSharp.dll:.ScatterPlot
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
+5e11a2ad934a923a7077b7a21900a585 Assembly-CSharp.dll:.ReticleSelection
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
-826bc060067ee4ff65e67fc4a6e3384a Assembly-CSharp.dll:.SendButtonBehaviour
+89d5f2c5f9e28bc2b2c9b1ede75dd56c Assembly-CSharp.dll:.SendButtonBehaviour
 5e11a2ad934a923a7077b7a21900a585 Assembly-CSharp.dll:.ReticleSelectionBehaviour
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -237,13 +236,14 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 006bda9b34945e4f8de158ca996d0f9b Assembly-CSharp.dll:.MinMaxSlider
 dff7a11839abb9fb7222280cf3c0a95a VuforiaScripts.dll:.DefaultModelRecoEventHandler
+464fa8abe16ffe4a94aab3e120d0db9a Assembly-CSharp.dll:.ServerDatasetReader_V2
 3b760e6526e13f7504f59e210145899a Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 507174d46dacbc5fe45e28485db5dd1e Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 296d68330393934e490fb840cc25bc7b Assembly-CSharp.dll:.UIManager
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LineChart
+c666afc18982fa2ff699ae61a3d4b7db Assembly-CSharp.dll:.LineChart
 69244bc56110bc9d5954fc92ca5f0b2c Assembly-CSharp.dll:.TgroupBehavior
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.AR_ChartGenerator
+ddaa9431e9f39e8721f38b97b846e910 Assembly-CSharp.dll:.AR_ChartGenerator
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 df434544c9f7b33d1cc7e635b180d279 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient

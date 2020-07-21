@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Vinicius Queiroz\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Vinicius Queiroz\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_VisManager_AR.-60591967.00" t="ExcludeRecursive" />
+    <e p="E:\Documentos\GitHub\VisManager_AR" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="AttributeSelector.cs" t="Include" />
+        <e p="CategoricSelector.cs" t="Include" />
+        <e p="Databases" t="Include">
+          <e p="cars_dataset.txt" t="Include" />
+        </e>
+        <e p="Editor" t="Include">
+          <e p="ChartGeneratorEditor.cs" t="Include" />
+        </e>
+        <e p="Prefabs" t="Include">
+          <e p="Min Max Slider" t="Include">
+            <e p="Editor" t="Include">
+              <e p="MinMaxSliderEditor.cs" t="Include" />
+            </e>
+            <e p="MinMaxSlider.cs" t="Include" />
+          </e>
+        </e>
+        <e p="RadialMenuBehavior.cs" t="Include" />
+        <e p="Scripts" t="Include">
+          <e p="Android_Scripts" t="Include">
+            <e p="AmbientLightManager.cs" t="Include" />
+            <e p="AR_ChartGenerator.cs" t="Include" />
+            <e p="AreaChart.cs" t="Include" />
+            <e p="BarChart.cs" t="Include" />
+            <e p="LineChart.cs" t="Include" />
+            <e p="PieChart.cs" t="Include" />
+            <e p="ReticleSelection.cs" t="Include" />
+            <e p="ScatterPlot.cs" t="Include" />
+            <e p="SendButtonBehaviour.cs" t="Include" />
+            <e p="ServerDatasetReader.cs" t="Include" />
+            <e p="ServerDatasetReader_V2.cs" t="Include" />
+          </e>
+          <e p="DatasetReader.cs" t="Include" />
+          <e p="FilterManager.cs" t="Include" />
+          <e p="Manager.cs" t="Include" />
+          <e p="MinMaxSliderBehavior.cs" t="Include" />
+          <e p="ProjectUtils.cs" t="Include" />
+          <e p="TgroupBehavior.cs" t="Include" />
+          <e p="UIButtonBehavior.cs" t="Include" />
+          <e p="UIManager.cs" t="Include" />
+          <e p="VisualizationManager.cs" t="Include" />
+        </e>
+        <e p="src" t="Include">
+          <e p="ChartGenerator.cs" t="Include" />
+          <e p="ColorChangeScene2.cs" t="Include" />
+          <e p="GenerateWithoutPrefab.cs" t="Include" />
+          <e p="GetMouseInteraction.cs" t="Include" />
+          <e p="ReadDatabase.cs" t="Include" />
+        </e>
+        <e p="StreamingAssets" t="Include">
+          <e p="Vuforia" t="Include">
+            <e p="AR_Cards.xml" t="Include" />
+          </e>
+        </e>
+        <e p="TextMesh Pro" t="Include">
+          <e p="Fonts" t="Include">
+            <e p="LiberationSans - OFL.txt" t="Include" />
+          </e>
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+            <e p="Shaders" t="Include">
+              <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+              <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+              <e p="TMP_Bitmap.shader" t="Include" />
+              <e p="TMP_SDF Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface.shader" t="Include" />
+              <e p="TMP_SDF.shader" t="Include" />
+              <e p="TMP_Sprite.shader" t="Include" />
+              <e p="TMPro.cginc" t="Include" />
+              <e p="TMPro_Properties.cginc" t="Include" />
+              <e p="TMPro_Surface.cginc" t="Include" />
+            </e>
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Vuforia" t="Include">
+          <e p="Databases" t="Include">
+            <e p="Emulator" t="Include">
+              <e p="VuforiaEmulator.xml" t="Include" />
+            </e>
+          </e>
+          <e p="Editor" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="OpenSourceInitializer.cs" t="Include" />
+              <e p="VuforiaEditorScripts.asmdef" t="Include" />
+            </e>
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="BoundingBoxRenderer.cs" t="Include" />
+            <e p="DefaultInitializationErrorHandler.cs" t="Include" />
+            <e p="DefaultModelRecoEventHandler.cs" t="Include" />
+            <e p="DefaultTrackableEventHandler.cs" t="Include" />
+            <e p="Internal" t="Include">
+              <e p="RuntimeOpenSourceInitializer.cs" t="Include" />
+            </e>
+            <e p="VuforiaScripts.asmdef" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="BrightTexture.shader" t="Include" />
+            <e p="CameraDiffuse.shader" t="Include" />
+            <e p="ClippingMask.shader" t="Include" />
+            <e p="ColoredLines.shader" t="Include" />
+            <e p="DepthContour.shader" t="Include" />
+            <e p="DepthMask.shader" t="Include" />
+            <e p="OutlineOpaque.shader" t="Include" />
+            <e p="Text3D.shader" t="Include" />
+            <e p="VertexLitWithZ.shader" t="Include" />
+            <e p="VideoBackground.shader" t="Include" />
+            <e p="VuforiaVB_RGB.cginc" t="Include" />
+            <e p="VuforiaVB_YUV420P_YUVYV12.cginc" t="Include" />
+            <e p="VuforiaVB_YUVNV12_YUVNV21.cginc" t="Include" />
+            <e p="VuforiaVideoBackground.cginc" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="VisManager_AR.sln" t="IncludeFlat" />
+      <e p="VuforiaEditorScripts.csproj" t="IncludeRecursive" />
+      <e p="VuforiaScripts.csproj" t="IncludeRecursive" />
+    </e>
+  </component>
+</project>

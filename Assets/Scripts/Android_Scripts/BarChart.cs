@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Vuforia;
 
 public class BarChart : DefaultTrackableEventHandler
@@ -13,6 +14,7 @@ public class BarChart : DefaultTrackableEventHandler
 
     private string default_X = "";
     private string default_Y = "";
+
 
     private void Awake()
     {

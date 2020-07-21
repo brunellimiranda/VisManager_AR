@@ -122,7 +122,6 @@ public class ServerDatasetReader_V2 : DefaultTrackableEventHandler
     {
         int quantity = datasetName.Length;
         int qCh = radialGrid.transform.childCount;
-        print("children: " + qCh);
 
         if (quantity <= qCh)
         {

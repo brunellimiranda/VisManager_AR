@@ -5,6 +5,7 @@ using Vuforia;
 using TMPro;
 using UnityEngine.Networking;
 using System.Globalization;
+using UnityEngine.Animations;
 
 /// <summary>
 /// Script for selection of a specific dataset from server
@@ -31,12 +32,14 @@ public class ReticleSelection : MonoBehaviour
     private string[] typeOfAttributes;
     private string[] firstRowData;
 
-    private Manager localManager;
+    private Manager m;
+    private ProjectUtils utils;
 
     private void Awake()
     {
         center = new Vector2((Screen.width / 2), (Screen.height / 2));
-        localManager = GameObject.Find("LogicManager").GetComponent<Manager>();
+        m = GameObject.Find("LogicManager").GetComponent<Manager>();
+        utils = GameObject.Find("LogicManager").GetComponent<ProjectUtils>();
     }
 
     private void Update()
@@ -45,34 +48,82 @@ public class ReticleSelection : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(center);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (!Physics.Raycast(ray, out hit)) return;
+
+        string request1;
+        switch (hit.transform.parent.tag)
         {
-            if (hit.transform.parent.tag == "LoadDataset_Item")
-            {
-                newDatasetName = hit.transform.GetChild(0).transform.GetChild(0).transform.GetComponent<UnityEngine.UI.Text>().text.ToString();
+            case "LoadDataset_Item":
+                newDatasetName = hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text;
                 if (previousDatasetName != null)
                 {
                     if (previousDatasetName == newDatasetName)
                     {
                         timer += Time.deltaTime;
-                        if (timer > dwellTime)
-                        {
-                            print("acertou: " + hit.transform.GetChild(0).transform.GetChild(0).transform.GetComponent<UnityEngine.UI.Text>().text);
-                            localManager.SetDatasetLoaded(newDatasetName);
-                            timer = 0;
-                            requestDataset = localManager.GetDatasetLoaded();
-                            requestServerPath = localManager.GetUrlPath();
-                            string request1 = requestServerPath + "/attributes/" + requestDataset;
-                            print("Resquest 1: " + request1);
-                            StartCoroutine(GetRequest(request1, 0));
-                            string request2 = requestServerPath + "/row/" + requestDataset + "/0";
-                            print("Resquest 2: " + request2);
-                            StartCoroutine(GetRequest(request2, 1));
-                        }
+                        if (!(timer > dwellTime)) return;
+                        print("acertou base: " + hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text);
+                        m.SetDatasetLoaded(newDatasetName);
+                        
+                        
+                        timer = 0;
+                        requestDataset = m.GetDatasetLoaded();
+                        requestServerPath = m.GetUrlPath();
+                        request1 = requestServerPath + "/attributes/" + requestDataset;
+                        print("Resquest 1: " + request1);
+                        StartCoroutine(GetRequest(request1, 0));
+                        string request2 = requestServerPath + "/row/" + requestDataset + "/0";
+                        print("Resquest 2: " + request2);
+                        StartCoroutine(GetRequest(request2, 1));
+                        return;
                     }
                 }
-            }
-            previousDatasetName = newDatasetName;
+                previousDatasetName = newDatasetName;
+                break;
+                
+            case "LoadAttribute_Item":
+                timer += Time.deltaTime;
+                if (!(timer > dwellTime)) return;
+                timer = 0;
+
+                print("acertou atributo: " + hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text);
+
+                if (hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text == "next page")
+                {
+                    GameObject.Find("Filter_Target").GetComponent<AttributeSelector>().NextPage();
+                    return;
+                }
+                
+                requestDataset = m.GetDatasetLoaded();
+                requestServerPath = m.GetUrlPath();
+                string requestAttribute = hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text;
+                request1 = requestServerPath + "/field/" + requestDataset + "/" + requestAttribute;
+
+                m.SetLastSelected(requestAttribute);
+                GameObject.Find("SetX_Target").GetComponent<CategoricSelector>().SetNewAttribute(requestAttribute);
+                
+                print("Resquest 3: " + request1);
+                StartCoroutine(GetRequest(request1, 2));
+                break;
+            
+            case "LoadCategoricOptions_Item":
+                timer += Time.deltaTime;
+                if (!(timer > dwellTime)) return;
+                timer = 0;
+
+                
+                print("selecionou categoria: " + hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text);
+
+                
+                if (hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text == "next page")
+                {
+                    GameObject.Find("SetX_Target").GetComponent<CategoricSelector>().NextPage();
+                }
+                
+                break;
+            
+            default:
+                print("card not implemented yet");
+                break;
         }
     }
 
@@ -87,29 +138,46 @@ public class ReticleSelection : MonoBehaviour
             }
             else
             {
-                if (level == 0)
+                switch (level)
                 {
-                    GetWWWAttributes(webRequest.downloadHandler.text);
+                    case 0:
+                        GetWWWAttributes(webRequest.downloadHandler.text);
+                        break;
+                    
+                    case 1: 
+                        GetWWWFirstLine(webRequest.downloadHandler.text);
+                        break;
+                    
+                    case 2:
+                        GetWWWRow(webRequest.downloadHandler.text);
+                        break;
+                        
+                    default:
+                        print("Error: the requisition " + level + " has not implemented yet");
+                        break;
                 }
-                else
-                {
-                    GetWWWFirstLine(webRequest.downloadHandler.text);
-                }
-
             }
         }
     }
 
+    private void GetWWWRow(string base64)
+    {
+        print(base64);
+        m.SetCategories(base64.Split(','));
+        GameObject.Find("SetX_Target").GetComponent<CategoricSelector>().RefreshAttribute();
+    }
+
     private void GetWWWAttributes(string base64str)
     {
-        attributes = base64str.ToString().Split(","[0]);
-        localManager.SetAttributes(attributes);
+        attributes = base64str.Split(","[0]);
+        m.SetAttributes(attributes);
+        GameObject.Find("Filter_Target").GetComponent<AttributeSelector>().UpdateGrid();
 
     }
 
     private void GetWWWFirstLine(string base64str)
     {
-        firstRowData = base64str.ToString().Split(","[0]);
+        firstRowData = base64str.Split(',');
         typeOfAttributes = new string[firstRowData.Length];
 
         int i = 0;
@@ -127,7 +195,7 @@ public class ReticleSelection : MonoBehaviour
             i++;
         }
 
-        localManager.SetTypeOfAttribute(typeOfAttributes);
-        localManager.SetDatasetStatus(true);
+        m.SetTypeOfAttribute(typeOfAttributes);
+        m.SetDatasetStatus(true);
     }
 }

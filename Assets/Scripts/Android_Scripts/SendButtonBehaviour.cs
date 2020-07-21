@@ -14,7 +14,7 @@ using System.Text;
 
 public class SendButtonBehaviour : MonoBehaviour
 {
-    public GameObject canvasI;
+    public GameObject panel;
 
     public InputField tField;
     public Text tText;
@@ -52,7 +52,7 @@ public class SendButtonBehaviour : MonoBehaviour
     IEnumerator UpdateCoroutine()
     {
         yield return new WaitForSeconds(2);
-        canvasI.SetActive(false);
+        panel.SetActive(false);
     }
 
     //Check the received data
