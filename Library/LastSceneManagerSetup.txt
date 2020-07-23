@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/RA_test.unity
-  isLoaded: 1
-  isActive: 1
