@@ -8,6 +8,7 @@ TagManager:
   - LoadDataset_Item
   - LoadAttribute_Item
   - LoadCategoricOptions_Item
+  - VisOption_Item
   layers:
   - Default
   - TransparentFX

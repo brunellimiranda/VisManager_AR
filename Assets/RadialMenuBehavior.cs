@@ -48,7 +48,7 @@ public class RadialMenuBehavior : MonoBehaviour
             {
                 values.Add(j >= _options.Count ? "disable" : _options[j]);
             }
-            if (_totalPages != 0) values.Add("next page");
+            if (_totalPages != 0) values.Add("more options");
             _pagesValues.Add(cp, values);
         }
 
@@ -58,11 +58,9 @@ public class RadialMenuBehavior : MonoBehaviour
 
     public void UpdatePage(int increment)
     {
-        if (_currentPage + increment > _totalPages)
-        {
-            _currentPage = 0;
-        }
-        _currentPage += increment;
+        if (_currentPage + increment > _totalPages) _currentPage = 0;
+        else _currentPage += increment;
+
         
         List<string> options = _pagesValues[_currentPage];
         
@@ -85,5 +83,20 @@ public class RadialMenuBehavior : MonoBehaviour
                 fatia.gameObject.SetActive(false);
             }
         }
+    }
+
+    public void ClearOptions()
+    {
+        _currentPage = 0;
+        _totalPages = 0;
+        _pagesValues = new Dictionary<int, List<string>>();
+        _pagesValues.Add(0, new List<string>
+        {
+            "option", "option", "option", 
+            "option", "option", "option", 
+            "option", "option", "option", 
+            "option", "option", "option"
+        });
+        UpdatePage(0);
     }
 }

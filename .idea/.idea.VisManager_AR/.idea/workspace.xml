@@ -17,12 +17,15 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Manager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/RadialMenuBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ProjectUtils.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Android_Scripts/AreaChart.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CategoricSelector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Android_Scripts/ServerDatasetReader_V2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6F816E74-7DC9-483C-AF5F-ECAAB1A81F95/85/2200deba/UnityWebRequest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/src/ChartGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Android_Scripts/AR_ChartGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Editor/ChartGeneratorEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ChartManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5AC29B9D-5193-4DD3-9A8D-CE946B9985A7/ef/1888f841/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UIManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Android_Scripts/ReticleSelection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FilterManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/AttributeSelector.cs" root0="FORCE_HIGHLIGHTING" />
@@ -30,18 +33,23 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Android_Scripts/BarChart.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Android_Scripts/SendButtonBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Android_Scripts/AR_ChartGenerator.cs" />
         <option value="$PROJECT_DIR$/Assets/FatiaBehavior.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Android_Scripts/ServerDatasetReader_V2.cs" />
         <option value="$PROJECT_DIR$/Assets/AxisSelector.cs" />
-        <option value="$PROJECT_DIR$/Assets/AttributeSelector.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Manager.cs" />
-        <option value="$PROJECT_DIR$/Assets/RadialMenuBehavior.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Android_Scripts/ReticleSelection.cs" />
-        <option value="$PROJECT_DIR$/Assets/CategoricSelector.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ProjectUtils.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Android_Scripts/ScatterPlot.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Android_Scripts/ServerDatasetReader_V2.cs" />
+        <option value="$PROJECT_DIR$/Assets/RadialMenuBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/CategoricSelector.cs" />
+        <option value="$PROJECT_DIR$/Assets/AttributeSelector.cs" />
+        <option value="$PROJECT_DIR$/Assets/src/ChartGenerator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Editor/ChartGeneratorEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Android_Scripts/BarChart.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Android_Scripts/AR_ChartGenerator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Android_Scripts/ReticleSelection.cs" />
+        <option value="$PROJECT_DIR$/Assets/ChartManager.cs" />
       </list>
     </option>
   </component>
@@ -85,6 +93,7 @@
       <updated>1595258527368</updated>
       <workItem from="1595258536443" duration="10855000" />
       <workItem from="1595345489442" duration="19036000" />
+      <workItem from="1595514457597" duration="15845000" />
     </task>
     <servers />
   </component>
@@ -98,9 +107,9 @@
       <screen x="-1600" y="172" width="1600" height="870" />
     </state>
     <state x="-1144" y="284" key="run.anything.popup/0.0.1920.1050/-1600.172.1600.870@-1600.172.1600.870" timestamp="1595354489912" />
-    <state x="-1137" y="354" width="672" height="678" key="search.everywhere.popup" timestamp="1595353876774">
+    <state x="-1137" y="354" width="672" height="678" key="search.everywhere.popup" timestamp="1595532168391">
       <screen x="-1600" y="172" width="1600" height="870" />
     </state>
-    <state x="-1137" y="354" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1600.172.1600.870@-1600.172.1600.870" timestamp="1595353876774" />
+    <state x="-1137" y="354" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1600.172.1600.870@-1600.172.1600.870" timestamp="1595532168391" />
   </component>
 </project>

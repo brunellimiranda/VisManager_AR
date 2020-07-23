@@ -59,16 +59,13 @@
   <ItemGroup>
     <Compile Include="Assets\AttributeSelector.cs" />
     <Compile Include="Assets\CategoricSelector.cs" />
+    <Compile Include="Assets\ChartManager.cs" />
     <Compile Include="Assets\Prefabs\Min Max Slider\MinMaxSlider.cs" />
     <Compile Include="Assets\RadialMenuBehavior.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\AmbientLightManager.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\AR_ChartGenerator.cs" />
-    <Compile Include="Assets\Scripts\Android_Scripts\AreaChart.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\BarChart.cs" />
-    <Compile Include="Assets\Scripts\Android_Scripts\LineChart.cs" />
-    <Compile Include="Assets\Scripts\Android_Scripts\PieChart.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\ReticleSelection.cs" />
-    <Compile Include="Assets\Scripts\Android_Scripts\ScatterPlot.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\SendButtonBehaviour.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\ServerDatasetReader.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\ServerDatasetReader_V2.cs" />

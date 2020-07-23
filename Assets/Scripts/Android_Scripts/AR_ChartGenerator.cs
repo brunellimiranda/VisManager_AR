@@ -8,27 +8,23 @@ using UnityEngine.UI;
 
 public class AR_ChartGenerator : MonoBehaviour
 {
-    string sender = null;
-    //GameObject senderChild;
-    //Transform senderChild;
-    
     public InputField b64printer;
-
-    public void GetChart(string path, string dataset, string xAxis, string yAxis, string vis, string senderObj)
+    public void GetChart(string path, string dataset, string xaxis, string yaxis, string vis)
     {
-        sender = senderObj;
         string url = "";
-        url = path + "/generate/" + dataset + "/chartgen.html?x=" +
-            xAxis + "&y=" + yAxis + "&chart=" + vis + "&title=" + dataset;
+        
+        if (vis == "parallel_coordinates") url = path + "/generate/" + dataset + "/chartgen.html?fold=" +
+                                                xaxis + "&z=" + yaxis + "&chart=parallel_coordinates&title=" + dataset;
+
+        else url = path + "/generate/" + dataset + "/chartgen.html?x=" +
+                   xaxis + "&y=" + yaxis + "&chart=" + vis + "&title=" + dataset;
 
         print("Requisition: " + url);
-        
         StartCoroutine(GetRequest(url));
     }
 
-    public void GetChart(string path, string dataset, string xAxis, string yAxis, string zAxis, string vis, string senderObj)
+    public void GetChart(string path, string dataset, string xAxis, string yAxis, string zAxis, string vis)
     {
-        sender = senderObj;
         string url = "";
         url = path + "/generate/" + dataset + "/chartgen.html?x=" +
             xAxis + "&y=" + yAxis + "&z=" + zAxis + "&chart=" + vis + "&title=" + dataset;
@@ -37,8 +33,6 @@ public class AR_ChartGenerator : MonoBehaviour
 
         StartCoroutine(GetRequest(url));
     }
-
-
 
     IEnumerator GetRequest(string uri)
     {
@@ -49,53 +43,40 @@ public class AR_ChartGenerator : MonoBehaviour
             {
                 print("Error: cannot retrieve information from server");
             }
-            else generateViz(webRequest.downloadHandler.text);
+            else GenerateViz(webRequest.downloadHandler.text);
         }
     }
 
-    void generateViz(string base64str)
+    void GenerateViz(string base64Str)
     {
-        if (base64str.Contains("<title>"))
-        { 
-            if (base64str.Contains("<title>"))
-            {
-                string[] temptext = base64str.Split(',');
-
-                base64str = temptext[1];
-                temptext = base64str.Split('\'');
-                base64str = temptext[0];
-            }
+        GameObject senderChild = gameObject;
+        SpriteRenderer renderer = senderChild.GetComponent<SpriteRenderer>();
+        PolygonCollider2D collider = senderChild.GetComponent<PolygonCollider2D>();
         
-            print(base64str);
+        if (base64Str.Contains("<title>"))
+        {
+            string[] temptext = base64Str.Split(',');
+
+            base64Str = temptext[1];
+            temptext = base64Str.Split('\'');
+            base64Str = temptext[0];
+            
+            b64printer.text = base64Str;
+            print(base64Str);
         }
         
-        b64printer.text = base64str;
-
-        string Base64string = base64str;
-        byte[] Bytes = Convert.FromBase64String(base64str);
+        byte[] Bytes = Convert.FromBase64String(base64Str);
         Texture2D tex = new Texture2D(900, 465);
         tex.LoadImage(Bytes);
-        //até aqui ok, provavelmente mudar a partir daqui
+
         Rect rect = new Rect(0, 0, tex.width, tex.height);
         Sprite sprite = Sprite.Create(tex, rect, new Vector2(0, 0), 100f);
-
-        var senderChild = gameObject;
-        SpriteRenderer renderer = senderChild.GetComponent<SpriteRenderer>();
-
-        if (renderer == null)
-        {
-            renderer = senderChild.gameObject.AddComponent<SpriteRenderer>();
-
-        }
+        
+        if (renderer == null) renderer = senderChild.gameObject.AddComponent<SpriteRenderer>();
         renderer.sprite = sprite;
-        b64printer.text += " sucesso";
 
-        PolygonCollider2D collider = senderChild.GetComponent<PolygonCollider2D>();
+        if (collider == null) senderChild.gameObject.AddComponent<PolygonCollider2D>();
+        b64printer.text += " success";
 
-        if (collider == null)
-        {
-            senderChild.gameObject.AddComponent<PolygonCollider2D>();
-
-        }
     }
 }

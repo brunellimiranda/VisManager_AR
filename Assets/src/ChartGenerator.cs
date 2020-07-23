@@ -17,8 +17,9 @@ public class ChartGenerator : MonoBehaviour
         BarChartVertical,
         LineChart,
         PieChart,
-        AreaChart,
-        Scatterplot
+        Scatterplot,
+        ParallelCordinates,
+        HeatMap
     }
 
     public enum DataType
@@ -236,8 +237,11 @@ public class ChartGenerator : MonoBehaviour
             case ChartType.PieChart:
                 dim = 2;
                 break;
-            case ChartType.AreaChart:
-                dim = 3;
+            case ChartType.HeatMap:
+                dim = 2;
+                break;
+            case ChartType.ParallelCordinates:
+                dim = 10;
                 break;
             case ChartType.Scatterplot:
                 dim = 4;

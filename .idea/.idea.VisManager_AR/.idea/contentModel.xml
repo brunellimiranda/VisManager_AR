@@ -9,6 +9,7 @@
       <e p="Assets" t="Include">
         <e p="AttributeSelector.cs" t="Include" />
         <e p="CategoricSelector.cs" t="Include" />
+        <e p="ChartManager.cs" t="Include" />
         <e p="Databases" t="Include">
           <e p="cars_dataset.txt" t="Include" />
         </e>
@@ -28,12 +29,8 @@
           <e p="Android_Scripts" t="Include">
             <e p="AmbientLightManager.cs" t="Include" />
             <e p="AR_ChartGenerator.cs" t="Include" />
-            <e p="AreaChart.cs" t="Include" />
             <e p="BarChart.cs" t="Include" />
-            <e p="LineChart.cs" t="Include" />
-            <e p="PieChart.cs" t="Include" />
             <e p="ReticleSelection.cs" t="Include" />
-            <e p="ScatterPlot.cs" t="Include" />
             <e p="SendButtonBehaviour.cs" t="Include" />
             <e p="ServerDatasetReader.cs" t="Include" />
             <e p="ServerDatasetReader_V2.cs" t="Include" />

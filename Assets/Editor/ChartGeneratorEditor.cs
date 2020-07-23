@@ -119,7 +119,7 @@ public class ChartGeneratorEditor : Editor
                 // break;
             case ChartGenerator.ChartType.LineChart:
             case ChartGenerator.ChartType.PieChart:
-            case ChartGenerator.ChartType.AreaChart:
+            case ChartGenerator.ChartType.HeatMap:
             case ChartGenerator.ChartType.Scatterplot:
                 // for (int i = 0; i < newc; i++)
                 //     script.colors[i] = EditorGUILayout.ColorField("Color " + i, script.colors[i]);

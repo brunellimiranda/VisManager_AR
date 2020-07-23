@@ -19,86 +19,96 @@ public class ReticleSelection : MonoBehaviour
 {
     public Vector2 center;
 
-    private string previousDatasetName;
-    private string newDatasetName;
+    private string _previousDatasetName;
+    private string _newDatasetName;
 
-    private float timer = 0.0f;
+    private float _timer = 0.0f;
     private float dwellTime = 1.5f;
 
-    private string requestDataset;
-    private string requestServerPath;
+    private string _requestDataset;
+    private string _requestServerPath;
 
-    private string[] attributes;
-    private string[] typeOfAttributes;
-    private string[] firstRowData;
+    private string[] _attributes;
+    private string[] _typeOfAttributes;
+    private string[] _firstRowData;
+    
+    public Material[] mColors;
 
-    private Manager m;
-    private ProjectUtils utils;
+    private Manager _m;
+    private ProjectUtils _u;
 
     private void Awake()
     {
         center = new Vector2((Screen.width / 2), (Screen.height / 2));
-        m = GameObject.Find("LogicManager").GetComponent<Manager>();
-        utils = GameObject.Find("LogicManager").GetComponent<ProjectUtils>();
+        _m = GameObject.Find("LogicManager").GetComponent<Manager>();
+        _u = GameObject.Find("LogicManager").GetComponent<ProjectUtils>();
     }
 
     private void Update()
     {
-        //print("Choosed Dataset: " + GameObject.Find("LogicManager").GetComponent<Manager>().GetDatasetLoaded());
         Ray ray = Camera.main.ScreenPointToRay(center);
         RaycastHit hit;
-
+        
         if (!Physics.Raycast(ray, out hit)) return;
-
+        
+        Transform go = hit.transform;
+        ChangeMenuCollors(hit);
+        
         string request1;
         switch (hit.transform.parent.tag)
         {
+        
+
             case "LoadDataset_Item":
-                newDatasetName = hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text;
-                if (previousDatasetName != null)
+                _newDatasetName = go.GetComponentInChildren<UnityEngine.UI.Text>().text;
+                if (_previousDatasetName != null)
                 {
-                    if (previousDatasetName == newDatasetName)
+                    if (_previousDatasetName == _newDatasetName)
                     {
-                        timer += Time.deltaTime;
-                        if (!(timer > dwellTime)) return;
-                        print("acertou base: " + hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text);
-                        m.SetDatasetLoaded(newDatasetName);
+                        _timer += Time.deltaTime;
+                        if (!(_timer > dwellTime)) return;
+                        _timer = 0;
+                        //turn selected slice to green
+                        go.GetComponent<MeshRenderer>().material = mColors[1];
+                        print("acertou base: " + go.GetComponentInChildren<UnityEngine.UI.Text>().text);
+                        _m.SetDatasetLoaded(_newDatasetName);
                         
-                        
-                        timer = 0;
-                        requestDataset = m.GetDatasetLoaded();
-                        requestServerPath = m.GetUrlPath();
-                        request1 = requestServerPath + "/attributes/" + requestDataset;
+                        _requestDataset = _m.GetDatasetLoaded();
+                        _requestServerPath = _m.GetUrlPath();
+                        request1 = _requestServerPath + "/attributes/" + _requestDataset;
                         print("Resquest 1: " + request1);
                         StartCoroutine(GetRequest(request1, 0));
-                        string request2 = requestServerPath + "/row/" + requestDataset + "/0";
+                        string request2 = _requestServerPath + "/row/" + _requestDataset + "/0";
                         print("Resquest 2: " + request2);
                         StartCoroutine(GetRequest(request2, 1));
                         return;
                     }
                 }
-                previousDatasetName = newDatasetName;
+                _previousDatasetName = _newDatasetName;
+                GameObject.Find("Filter_Target").GetComponent<AttributeSelector>().ClearOptions();
                 break;
                 
             case "LoadAttribute_Item":
-                timer += Time.deltaTime;
-                if (!(timer > dwellTime)) return;
-                timer = 0;
+                _timer += Time.deltaTime;
+                if (!(_timer > dwellTime)) return;
+                _timer = 0;
+                
+                //turn selected slice to green
+                go.GetComponent<MeshRenderer>().material = mColors[1];
+                print("acertou atributo: " + go.GetComponentInChildren<UnityEngine.UI.Text>().text);
 
-                print("acertou atributo: " + hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text);
-
-                if (hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text == "next page")
+                if (go.GetComponentInChildren<UnityEngine.UI.Text>().text == "more options")
                 {
                     GameObject.Find("Filter_Target").GetComponent<AttributeSelector>().NextPage();
                     return;
                 }
                 
-                requestDataset = m.GetDatasetLoaded();
-                requestServerPath = m.GetUrlPath();
-                string requestAttribute = hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text;
-                request1 = requestServerPath + "/field/" + requestDataset + "/" + requestAttribute;
+                _requestDataset = _m.GetDatasetLoaded();
+                _requestServerPath = _m.GetUrlPath();
+                string requestAttribute = go.GetComponentInChildren<UnityEngine.UI.Text>().text;
+                request1 = _requestServerPath + "/field/" + _requestDataset + "/" + requestAttribute;
 
-                m.SetLastSelected(requestAttribute);
+                _m.SetLastSelected(requestAttribute);
                 GameObject.Find("SetX_Target").GetComponent<CategoricSelector>().SetNewAttribute(requestAttribute);
                 
                 print("Resquest 3: " + request1);
@@ -106,20 +116,33 @@ public class ReticleSelection : MonoBehaviour
                 break;
             
             case "LoadCategoricOptions_Item":
-                timer += Time.deltaTime;
-                if (!(timer > dwellTime)) return;
-                timer = 0;
+                _timer += Time.deltaTime;
+                if (!(_timer > dwellTime)) return;
+                _timer = 0;
 
+                //turn selected slice to green
+                go.GetComponent<MeshRenderer>().material = mColors[1];
+                print("selecionou categoria: " + go.GetComponentInChildren<UnityEngine.UI.Text>().text);
                 
-                print("selecionou categoria: " + hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text);
-
-                
-                if (hit.transform.GetComponentInChildren<UnityEngine.UI.Text>().text == "next page")
+                if (go.GetComponentInChildren<UnityEngine.UI.Text>().text == "more options")
                 {
                     GameObject.Find("SetX_Target").GetComponent<CategoricSelector>().NextPage();
                 }
                 
                 break;
+            
+            case "VisOption_Item":
+                _timer += Time.deltaTime;
+                if (!(_timer > dwellTime)) return;
+                _timer = 0;
+                
+                //turn selected slice to green
+                go.GetComponent<MeshRenderer>().material = mColors[1];
+                go.GetComponentInParent<ChartManager>().SetVisType(go.GetComponentInChildren<UnityEngine.UI.Text>().text);
+                
+                print("acertou vis: " + go.GetComponentInChildren<UnityEngine.UI.Text>().text);
+                break;
+            
             
             default:
                 print("card not implemented yet");
@@ -163,39 +186,58 @@ public class ReticleSelection : MonoBehaviour
     private void GetWWWRow(string base64)
     {
         print(base64);
-        m.SetCategories(base64.Split(','));
+        _m.SetCategories(base64.Split(','));
         GameObject.Find("SetX_Target").GetComponent<CategoricSelector>().RefreshAttribute();
     }
 
     private void GetWWWAttributes(string base64str)
     {
-        attributes = base64str.Split(","[0]);
-        m.SetAttributes(attributes);
+        _attributes = base64str.Split(","[0]);
+        _m.SetAttributes(_attributes);
         GameObject.Find("Filter_Target").GetComponent<AttributeSelector>().UpdateGrid();
 
     }
 
     private void GetWWWFirstLine(string base64str)
     {
-        firstRowData = base64str.Split(',');
-        typeOfAttributes = new string[firstRowData.Length];
+        _firstRowData = base64str.Split(',');
+        _typeOfAttributes = new string[_firstRowData.Length];
 
         int i = 0;
 
-        foreach (string x in firstRowData)
+        foreach (string x in _firstRowData)
         {
             if (float.TryParse(x, NumberStyles.Any, CultureInfo.InvariantCulture, out float temp))
             {
-                typeOfAttributes[i] = "CONT";
+                _typeOfAttributes[i] = "CONT";
             }
             else
             {
-                typeOfAttributes[i] = "CAT";
+                _typeOfAttributes[i] = "CAT";
             }
             i++;
         }
 
-        m.SetTypeOfAttribute(typeOfAttributes);
-        m.SetDatasetStatus(true);
+        _m.SetTypeOfAttribute(_typeOfAttributes);
+        _m.SetDatasetStatus(true);
+    }
+
+    private void ChangeMenuCollors(RaycastHit hit)
+    {
+        //change active slice to blue and every other slice to default
+        Transform parentObj = hit.transform.parent.transform.parent;
+        //check which slice is selected and turn all the others to default color
+        foreach (Transform child in parentObj)
+        {
+            if (child.name != hit.transform.parent.name)
+            {
+                child.GetComponentInChildren<MeshRenderer>().material = mColors[2];
+            }
+        }
+        //if there is a green slice (dataset selected) don't turn it to blue
+        if (hit.transform.GetComponent<MeshRenderer>().material.color != mColors[1].color)
+        {
+            hit.transform.GetComponent<MeshRenderer>().material = mColors[0];
+        }
     }
 }

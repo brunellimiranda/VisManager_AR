@@ -49,5 +49,10 @@ public class CategoricSelector : MonoBehaviour
         radialmenu.GetComponent<RadialMenuBehavior>().UpdatePage(1);
     }
 
+    public void ClearOptions()
+    {
+        radialmenu.GetComponent<RadialMenuBehavior>().ClearOptions();
+    }
+
 
 }

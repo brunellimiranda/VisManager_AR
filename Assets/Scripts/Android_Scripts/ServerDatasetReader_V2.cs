@@ -139,15 +139,11 @@ public class ServerDatasetReader_V2 : DefaultTrackableEventHandler
                 }
             }
         }
-        //print("alcancou a chamada");
         turnOnReticle();
     }
 
     private void turnOnReticle()
     {
-        //GameObject theManager = GameObject.Find("LogicManager");
-        //Manager managerLocal = theManager.GetComponent<Manager>();
-        //managerLocal.SetReticleStatus(true);
         reticle.SetActive(true);
     }
 }

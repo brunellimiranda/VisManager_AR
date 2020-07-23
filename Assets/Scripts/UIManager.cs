@@ -339,11 +339,15 @@ public class UIManager : MonoBehaviour
                 break;
             
             case 4:
-                chartType = ChartGenerator.ChartType.AreaChart;
+                chartType = ChartGenerator.ChartType.HeatMap;
                 break;
-            
+
             case 5:
                 chartType = ChartGenerator.ChartType.Scatterplot;
+                break;
+            
+            case 6:
+                chartType = ChartGenerator.ChartType.ParallelCordinates;
                 break;
         }
         

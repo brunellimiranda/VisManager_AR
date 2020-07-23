@@ -37,4 +37,9 @@ public class AttributeSelector : MonoBehaviour
     {
         radialmenu.GetComponent<RadialMenuBehavior>().SetRadialOptions(m.GetAttributes().ToList());
     }
+
+    public void ClearOptions()
+    {
+        radialmenu.GetComponent<RadialMenuBehavior>().ClearOptions();
+    }
 }
