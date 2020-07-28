@@ -6,9 +6,22 @@ TagManager:
   tags:
   - Visualization
   - LoadDataset_Item
-  - LoadAttribute_Item
-  - LoadCategoricOptions_Item
   - VisOption_Item
+  - VisCard
+  - AxisVisOption_Item
+  - AxisOption_Item
+  - AxisAttribute_Item
+  - blocker
+  - ClearOption_Item
+  - ClearVis_Item
+  - ClearFilter_Item
+  - ClearAxis_Item
+  - SliderButton
+  - AR Object
+  - Attribute_Item
+  - Categoric_Item
+  - Numeric_ITem
+  - check
   layers:
   - Default
   - TransparentFX

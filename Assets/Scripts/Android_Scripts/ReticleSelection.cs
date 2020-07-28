@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
@@ -6,6 +7,7 @@ using TMPro;
 using UnityEngine.Networking;
 using System.Globalization;
 using UnityEngine.Animations;
+using UnityEngine.UI;
 
 /// <summary>
 /// Script for selection of a specific dataset from server
@@ -19,8 +21,7 @@ public class ReticleSelection : MonoBehaviour
 {
     public Vector2 center;
 
-    private string _previousDatasetName;
-    private string _newDatasetName;
+    private string _datasetName;
 
     private float _timer = 0.0f;
     private float dwellTime = 1.5f;
@@ -31,7 +32,8 @@ public class ReticleSelection : MonoBehaviour
     private string[] _attributes;
     private string[] _typeOfAttributes;
     private string[] _firstRowData;
-    
+    bool pl;
+
     public Material[] mColors;
 
     private Manager _m;
@@ -46,104 +48,147 @@ public class ReticleSelection : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.A))
+        {
+            GameObject.Find("Filter_Target").GetComponent<AR_FilterManager>().GenerateFilter();
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(center);
         RaycastHit hit;
         
+        
         if (!Physics.Raycast(ray, out hit)) return;
+        if (hit.transform.CompareTag("blocker")) return;
         
         Transform go = hit.transform;
-        ChangeMenuCollors(hit);
         
-        string request1;
+        
+        if (hit.transform.CompareTag("SliderButton") || hit.transform.parent.CompareTag("SliderButton"))
+        {
+            go.GetComponentInParent<SliderManager>().UpdateValues(go.transform);
+
+            return;
+        }
+        
+        if (hit.transform.CompareTag("Numeric_ITem") || hit.transform.parent.CompareTag("Numeric_ITem"))
+        {
+            go.GetComponentInParent<SelectorManager>().UpdateFilterValues();
+            return;
+        }
+        
+        ChangeMenuCollors(hit);
+        _timer += Time.deltaTime;
+        if (!(_timer > dwellTime)) return;
+        _timer = 0;
+
+        if (hit.transform.CompareTag("check"))
+        {
+            print("Seleção invertida aplicada!");
+            go.GetComponentInParent<SelectorManager>().SetInvertedSelection();
+            return;
+        }
+        
+        go.GetComponent<MeshRenderer>().material = mColors[1];
+
+        int visId;
+        string option = go.GetComponentInChildren<Text>().text;
+
         switch (hit.transform.parent.tag)
         {
-        
-
             case "LoadDataset_Item":
-                _newDatasetName = go.GetComponentInChildren<UnityEngine.UI.Text>().text;
-                if (_previousDatasetName != null)
+                _datasetName = option;
+                
+                if (_datasetName != null)
                 {
-                    if (_previousDatasetName == _newDatasetName)
-                    {
-                        _timer += Time.deltaTime;
-                        if (!(_timer > dwellTime)) return;
-                        _timer = 0;
-                        //turn selected slice to green
-                        go.GetComponent<MeshRenderer>().material = mColors[1];
-                        print("acertou base: " + go.GetComponentInChildren<UnityEngine.UI.Text>().text);
-                        _m.SetDatasetLoaded(_newDatasetName);
-                        
-                        _requestDataset = _m.GetDatasetLoaded();
-                        _requestServerPath = _m.GetUrlPath();
-                        request1 = _requestServerPath + "/attributes/" + _requestDataset;
-                        print("Resquest 1: " + request1);
-                        StartCoroutine(GetRequest(request1, 0));
-                        string request2 = _requestServerPath + "/row/" + _requestDataset + "/0";
-                        print("Resquest 2: " + request2);
-                        StartCoroutine(GetRequest(request2, 1));
-                        return;
-                    }
+                    //Action
+                    print("selecionou database " + option);
+                    
+                    _m.SetDatasetLoaded(option);
+                    _requestServerPath = _m.GetUrlPath();
+                    string request1 = _requestServerPath + "/attributes/" + option;
+                    
+                    print("Request 1: " + request1);
+                    StartCoroutine(GetRequest(request1, 0));
+                    return;
                 }
-                _previousDatasetName = _newDatasetName;
-                GameObject.Find("Filter_Target").GetComponent<AttributeSelector>().ClearOptions();
                 break;
-                
-            case "LoadAttribute_Item":
-                _timer += Time.deltaTime;
-                if (!(_timer > dwellTime)) return;
-                _timer = 0;
-                
-                //turn selected slice to green
-                go.GetComponent<MeshRenderer>().material = mColors[1];
-                print("acertou atributo: " + go.GetComponentInChildren<UnityEngine.UI.Text>().text);
-
-                if (go.GetComponentInChildren<UnityEngine.UI.Text>().text == "more options")
+            
+            // ==== Vis Card ==== //
+            case "VisOption_Item":
+                print("acertou vis: " + option);
+                int parentId = go.GetComponentInParent<ChartManager>().GetId();
+                go.GetComponentInParent<ChartManager>().SetVisType(option);
+                _m.AddNewActiveVisualization(parentId, option);
+                break;
+            
+            // ==== Axis Cards ==== //
+            case "AxisVisOption_Item":
+                print("Selecionou Vis Ativa: " + option);
+                pl = option.Contains("parallel_coordinates");
+                go.GetComponentInParent<AxisManager>().SelectedVis(option);
+                break;
+            
+            case "AxisOption_Item":
+                if (go.GetComponentInChildren<Text>().text == "more options")
                 {
-                    GameObject.Find("Filter_Target").GetComponent<AttributeSelector>().NextPage();
+                    GameObject.Find("SetX_Target").GetComponent<AxisManager>().NextPage();
                     return;
                 }
                 
-                _requestDataset = _m.GetDatasetLoaded();
-                _requestServerPath = _m.GetUrlPath();
-                string requestAttribute = go.GetComponentInChildren<UnityEngine.UI.Text>().text;
-                request1 = _requestServerPath + "/field/" + _requestDataset + "/" + requestAttribute;
-
-                _m.SetLastSelected(requestAttribute);
-                GameObject.Find("SetX_Target").GetComponent<CategoricSelector>().SetNewAttribute(requestAttribute);
-                
-                print("Resquest 3: " + request1);
-                StartCoroutine(GetRequest(request1, 2));
+                print("Selecionou Opção: " + option);
+                go.GetComponentInParent<AxisManager>().SelectedAxis(option, pl);
                 break;
             
-            case "LoadCategoricOptions_Item":
-                _timer += Time.deltaTime;
-                if (!(_timer > dwellTime)) return;
-                _timer = 0;
-
-                //turn selected slice to green
-                go.GetComponent<MeshRenderer>().material = mColors[1];
-                print("selecionou categoria: " + go.GetComponentInChildren<UnityEngine.UI.Text>().text);
-                
-                if (go.GetComponentInChildren<UnityEngine.UI.Text>().text == "more options")
+            case "AxisAttribute_Item":
+                if (go.GetComponentInChildren<Text>().text == "more options")
                 {
-                    GameObject.Find("SetX_Target").GetComponent<CategoricSelector>().NextPage();
+                    GameObject.Find("SetX_Target").GetComponent<AxisManager>().NextPage();
+                    return;
                 }
                 
+                print("Selecionou Atributo: " + option);
+                go.GetComponentInParent<AxisManager>().SetAxisOnVis(option);
                 break;
             
-            case "VisOption_Item":
-                _timer += Time.deltaTime;
-                if (!(_timer > dwellTime)) return;
-                _timer = 0;
-                
-                //turn selected slice to green
-                go.GetComponent<MeshRenderer>().material = mColors[1];
-                go.GetComponentInParent<ChartManager>().SetVisType(go.GetComponentInChildren<UnityEngine.UI.Text>().text);
-                
-                print("acertou vis: " + go.GetComponentInChildren<UnityEngine.UI.Text>().text);
+            // ==== Clear Card ==== //
+            case "ClearOption_Item":
+                go.GetComponentInParent<ClearCardManager>().ClearOption(option);
                 break;
             
+            case "ClearVis_Item":
+                visId = Int32.Parse(option[0].ToString());
+                go.GetComponentInParent<ClearCardManager>().ClearVis(visId);
+                break;
             
+            case "ClearAxis_Item":
+                visId = Int32.Parse(option[0].ToString());
+                go.GetComponentInParent<ClearCardManager>().ClearAxis(visId);
+                break;
+            
+            // ==== Filter Card ==== //
+            case "Attribute_Item":
+                AR_FilterManager FilterTarget = GameObject.Find("Filter_Target").GetComponent<AR_FilterManager>();
+                if (option == "more options")
+                {
+                    FilterTarget.NextPage(1);
+                    return;
+                }
+                
+                print("acertou atributo: " + option);
+                FilterTarget.UpdateFilter(option);
+                break;
+            
+            case "Categoric_Item":
+                if (option == "more options")
+                { 
+                    go.GetComponentInParent<SelectorManager>().NextPage(1);
+                    return;
+                }
+
+                go.GetComponentInParent<SelectorManager>().AddNewOption(option);
+                go.GetComponentInParent<SelectorManager>().UpdateFilterValues();
+                break;
+
             default:
                 print("card not implemented yet");
                 break;
@@ -166,15 +211,11 @@ public class ReticleSelection : MonoBehaviour
                     case 0:
                         GetWWWAttributes(webRequest.downloadHandler.text);
                         break;
-                    
-                    case 1: 
+
+                    case 1:
                         GetWWWFirstLine(webRequest.downloadHandler.text);
                         break;
-                    
-                    case 2:
-                        GetWWWRow(webRequest.downloadHandler.text);
-                        break;
-                        
+
                     default:
                         print("Error: the requisition " + level + " has not implemented yet");
                         break;
@@ -183,31 +224,27 @@ public class ReticleSelection : MonoBehaviour
         }
     }
 
-    private void GetWWWRow(string base64)
-    {
-        print(base64);
-        _m.SetCategories(base64.Split(','));
-        GameObject.Find("SetX_Target").GetComponent<CategoricSelector>().RefreshAttribute();
-    }
-
     private void GetWWWAttributes(string base64str)
     {
         _attributes = base64str.Split(","[0]);
         _m.SetAttributes(_attributes);
-        GameObject.Find("Filter_Target").GetComponent<AttributeSelector>().UpdateGrid();
-
+        
+        string request = _requestServerPath + "/row/" + _m.GetDatasetLoaded() + "/0";
+        print("Request 2: " + request);
+        
+        StartCoroutine(GetRequest(request, 1));
     }
 
-    private void GetWWWFirstLine(string base64str)
+    private void GetWWWFirstLine(string base64Str)
     {
-        _firstRowData = base64str.Split(',');
+        _m.SetDatasetStatus(true);
+        _firstRowData = base64Str.Split(',');
         _typeOfAttributes = new string[_firstRowData.Length];
 
-        int i = 0;
 
-        foreach (string x in _firstRowData)
+        for (int i = 0; i < _firstRowData.Length; i++)
         {
-            if (float.TryParse(x, NumberStyles.Any, CultureInfo.InvariantCulture, out float temp))
+            if (float.TryParse(_firstRowData[i], NumberStyles.Any, CultureInfo.InvariantCulture, out float _))
             {
                 _typeOfAttributes[i] = "CONT";
             }
@@ -215,15 +252,15 @@ public class ReticleSelection : MonoBehaviour
             {
                 _typeOfAttributes[i] = "CAT";
             }
-            i++;
         }
 
         _m.SetTypeOfAttribute(_typeOfAttributes);
-        _m.SetDatasetStatus(true);
+
     }
 
     private void ChangeMenuCollors(RaycastHit hit)
     {
+        if(hit.transform.CompareTag("check")) return;
         //change active slice to blue and every other slice to default
         Transform parentObj = hit.transform.parent.transform.parent;
         //check which slice is selected and turn all the others to default color

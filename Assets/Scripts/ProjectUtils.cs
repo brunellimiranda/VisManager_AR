@@ -26,6 +26,23 @@ public class ProjectUtils : MonoBehaviour
         
         return new Vector2(min, max);
     }
+    
+    public Vector2 GetMinMaxValues(string[] attributes)
+    {
+        float min = float.MaxValue;
+        float max = float.MinValue;
+
+        foreach (string value in attributes)
+        {
+            float fValue = float.Parse(value, CultureInfo.InvariantCulture);
+            if (fValue < min)
+                min = (float) fValue;
+            else if (fValue > max)
+                max = (float) fValue;
+        }
+        
+        return new Vector2(min, max);
+    }
 
     public List<string> GetAttributes(int index, List<string[]> database)
     {
@@ -67,8 +84,6 @@ public class ProjectUtils : MonoBehaviour
         
         return categoricAttributes;
     }
-    
-    
     
     public List<string> GetCategoricAttributes(List<Type> tipos, List<string> labels)
     {

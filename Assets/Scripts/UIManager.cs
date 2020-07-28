@@ -145,6 +145,7 @@ public class UIManager : MonoBehaviour
         // se não existe, instancia novo filtro
         
         GameObject newFilter = tipo != typeof(string) ? InitializeMinMaxSlider(index) : InitializeCheckGroup(index);
+        
         newFilter.name = "Filter_" + index;
         _filters.Add(newFilter);
     }

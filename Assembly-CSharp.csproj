@@ -57,19 +57,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AttributeSelector.cs" />
-    <Compile Include="Assets\CategoricSelector.cs" />
-    <Compile Include="Assets\ChartManager.cs" />
+    <Compile Include="Assets\Prefabs\3dSlider\SliderManager.cs" />
     <Compile Include="Assets\Prefabs\Min Max Slider\MinMaxSlider.cs" />
-    <Compile Include="Assets\RadialMenuBehavior.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\AmbientLightManager.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\AR_ChartGenerator.cs" />
-    <Compile Include="Assets\Scripts\Android_Scripts\BarChart.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\AR_FilterManager.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\AxisManager.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\ChartManager.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\ClearCardManager.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\DatasetManager.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\DatasetReader.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\RadialMenuBehavior.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\ReticleSelection.cs" />
+    <Compile Include="Assets\Scripts\Android_Scripts\SelectorManager.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\SendButtonBehaviour.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\ServerDatasetReader.cs" />
     <Compile Include="Assets\Scripts\Android_Scripts\ServerDatasetReader_V2.cs" />
-    <Compile Include="Assets\Scripts\DatasetReader.cs" />
     <Compile Include="Assets\Scripts\FilterManager.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\MinMaxSliderBehavior.cs" />

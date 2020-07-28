@@ -55,7 +55,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         m_PreviousStatus = previousStatus;
         m_NewStatus = newStatus;
         
-        Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + 
+        Debug.LogWarning("Trackable " + mTrackableBehaviour.TrackableName + 
                   " " + mTrackableBehaviour.CurrentStatus +
                   " -- " + mTrackableBehaviour.CurrentStatusInfo);
 

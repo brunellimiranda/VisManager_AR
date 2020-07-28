@@ -9,27 +9,27 @@ using UnityEngine.UI;
 public class AR_ChartGenerator : MonoBehaviour
 {
     public InputField b64printer;
-    public void GetChart(string path, string dataset, string xaxis, string yaxis, string vis)
+    public void GetChart(string path, string dataset, string xaxis, string yaxis, string vis, string title, string filter)
     {
-        string url = "";
+        string url;
         
         if (vis == "parallel_coordinates") url = path + "/generate/" + dataset + "/chartgen.html?fold=" +
                                                 xaxis + "&z=" + yaxis + "&chart=parallel_coordinates&title=" + dataset;
 
         else url = path + "/generate/" + dataset + "/chartgen.html?x=" +
-                   xaxis + "&y=" + yaxis + "&chart=" + vis + "&title=" + dataset;
+                   xaxis + "&y=" + yaxis + "&chart=" + vis + "&title=" + title + "&filter=" + filter;
 
-        print("Requisition: " + url);
+        print("Request Chart: " + url);
         StartCoroutine(GetRequest(url));
     }
 
-    public void GetChart(string path, string dataset, string xAxis, string yAxis, string zAxis, string vis)
+    public void GetChart(string path, string dataset, string xAxis, string yAxis, string zAxis, string vis, string title, string filter)
     {
-        string url = "";
+        string url;
         url = path + "/generate/" + dataset + "/chartgen.html?x=" +
-            xAxis + "&y=" + yAxis + "&z=" + zAxis + "&chart=" + vis + "&title=" + dataset;
+            xAxis + "&y=" + yAxis + "&z=" + zAxis + "&chart=" + vis + "&title=" + title + "&filter=" + filter;
 
-        print("Requisition: " + url);
+        print("Request Chart: " + url);
 
         StartCoroutine(GetRequest(url));
     }
@@ -77,6 +77,12 @@ public class AR_ChartGenerator : MonoBehaviour
 
         if (collider == null) senderChild.gameObject.AddComponent<PolygonCollider2D>();
         b64printer.text += " success";
+    }
 
+    public void ClearChart()
+    {
+        Destroy(gameObject.GetComponent<SpriteRenderer>());
+        Destroy(gameObject.GetComponent<PolygonCollider2D>());
+        
     }
 }

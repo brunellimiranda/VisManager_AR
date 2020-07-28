@@ -19,6 +19,10 @@ public class ChartManager : DefaultTrackableEventHandler
     private string _defaultX = "";
     private string _defaultY = "";
     private string _defaultZ = "";
+    
+    private string _xAxis = "";
+    private string _yAxis = "";
+    private string _zAxis = "";
 
     private string _chartType = "";
     private string _chartAttTypes = "";
@@ -43,15 +47,17 @@ public class ChartManager : DefaultTrackableEventHandler
     protected override void OnTrackingFound()
     {
         base.OnTrackingFound();
-
+        
         _serverPath = _m.GetUrlPath();
         _datasetName = _m.GetDatasetLoaded();
-        if (!string.IsNullOrEmpty(_m.GetDatasetLoaded()))
+
+        if (!string.IsNullOrEmpty(_datasetName))
         {
             if (_visSelected)
             {
                 _rm.gameObject.SetActive(false);
-                SetDefaultAxis();    
+                if (_xAxis == "" || _yAxis == "" || _zAxis == "") SetDefaultAxis();
+                GenerateChart();
             }
             else
             {
@@ -61,10 +67,36 @@ public class ChartManager : DefaultTrackableEventHandler
         }
         else Debug.LogError("Error01: Please, select one dataset using a Dataset Card!");
     }
-
-    protected override void OnTrackingLost()
+    
+    
+    private void GenerateChart()
     {
-        //
+        string title;
+        if (_xAxis == "") _xAxis = _defaultX;
+        if (_yAxis == "") _yAxis = _defaultY;
+
+        string filter = _m.GetFilter();
+        
+        switch (_maxDimensions)
+        {
+            case 2:
+                
+                if (_chartType == "parallel_coordinates") _xAxis = _xAxis.Substring(0, _xAxis.Length-1);
+                title = _chartType == "parallel_coordinates" ? "Parallel Coordinates" : _xAxis + " x " + _yAxis;
+                
+                GetComponentInChildren<AR_ChartGenerator>().
+                    GetChart(_serverPath, _datasetName, _xAxis, _yAxis,_chartType, title, filter);
+                return;
+            
+            case 3:
+
+                title = _xAxis + " x " + _yAxis;
+                if (_zAxis != "") title += " x " + _zAxis;
+                
+                GetComponentInChildren<AR_ChartGenerator>().
+                    GetChart(_serverPath, _datasetName, _xAxis, _yAxis, _zAxis, _chartType, title, filter);
+                return;
+        }
     }
 
     private void SetDefaultAxis()
@@ -97,9 +129,7 @@ public class ChartManager : DefaultTrackableEventHandler
                    if(i + 1 == _datasetAtt.Length && (cont < 2)) 
                        Debug.LogError("Error2: Please, select another dataset for this chart!");
                }
-
-               GetComponentInChildren<AR_ChartGenerator>().
-                   GetChart(_serverPath, _datasetName, _defaultX, _defaultY,_chartType);
+               
                break;
            
            case "heatmap":
@@ -122,9 +152,7 @@ public class ChartManager : DefaultTrackableEventHandler
                    if(i + 1 == _datasetAtt.Length && (cont < 2)) 
                        Debug.LogError("Error2: Please, select another dataset for this chart!");
                }
-
-               GetComponentInChildren<AR_ChartGenerator>().
-                   GetChart(_serverPath, _datasetName, _defaultX, _defaultY,_chartType);
+               
                break;
            
            case "parallel_coordinates":
@@ -150,8 +178,6 @@ public class ChartManager : DefaultTrackableEventHandler
                        Debug.LogError("Error2: Please, select another dataset for this chart!");
                }
                
-               GetComponentInChildren<AR_ChartGenerator>().
-                   GetChart(_serverPath, _datasetName, fold, _defaultZ, _chartType);
                break;
 
            default:
@@ -174,11 +200,7 @@ public class ChartManager : DefaultTrackableEventHandler
                     if(i + 1 == _datasetAtt.Length && (cat == 0 || cont == 0)) 
                         Debug.LogError("Error2: Please, select another dataset for this chart!");
                 }
-                
-                GetComponentInChildren<AR_ChartGenerator>().
-                    GetChart(_serverPath, _datasetName, _defaultX, _defaultY,_chartType);
                 break;
-            
         }
     }
 
@@ -189,16 +211,17 @@ public class ChartManager : DefaultTrackableEventHandler
         
         switch (_chartType)
         {
-            case "barchartvertical":
+            case "barchartvertical": goto case "piechart";
+            case "piechart":
                 _chartAttTypes = "cn";
                 _necessaryDimensions = 2;
                 _maxDimensions = 2;
                 break;
             
-            case "piechart":
-                _chartAttTypes = "cn";
+            case "linechart":
+                _chartAttTypes = "cnc";
                 _necessaryDimensions = 2;
-                _maxDimensions = 2;
+                _maxDimensions = 3;
                 break;
             
             
@@ -214,19 +237,86 @@ public class ChartManager : DefaultTrackableEventHandler
                 _maxDimensions = 2;
                 break;
             
-            case "parallel_cordinates":
-                _chartAttTypes = "fold";
+            case "parallel_coordinates":
+                _chartAttTypes = "nc";
                 _necessaryDimensions = 2;
-                _maxDimensions = 10;
+                _maxDimensions = 2;
                 break;
         }
         
         _visSelected = true;
     }
 
+
     public void ClearVisType()
     {
+        _xAxis = "";
+        _yAxis = "";
+        _zAxis = "";
+        _defaultX = "";
+        _defaultY = "";
+        _defaultZ = "";
         _chartType = "";
         _visSelected = false;
+        GetComponentInChildren<AR_ChartGenerator>().ClearChart();
     }
+
+    public void ClearVisAxis()
+    {
+        _xAxis = "";
+        _yAxis = "";
+        _zAxis = "";
+        SetDefaultAxis();
+    }
+
+    public int GetId()
+    {
+        int id = Int32.Parse(name[14].ToString());
+        return id;
+    }
+
+    public string GetAttTypes()
+    {
+        return _chartAttTypes;
+    }
+
+    public string GetChartType()
+    {
+        return _chartType;
+    }
+
+    public int GetMaxDim()
+    {
+        return _maxDimensions;
+    }
+
+    public string SetXAxis(string label)
+    {
+        print("setou X Axis: " + label + " on Vis: " + _chartType);
+        if (_chartType == "parallel_coordinates")
+        {
+            print("set x in parallel coordinates");
+            _xAxis += label + ";";
+            return _xAxis;
+        }
+        
+        _xAxis = label;
+        return _xAxis;
+    }
+
+    public string SetYAxis(string label)
+    {
+        print("setou Y Axis: " + label + " on Vis: " + _chartType);
+        _yAxis = label;
+        return _yAxis;
+    }
+
+    public string SetZAxis(string label)
+    {
+        print("setou Cor Axis: " + label + " on Vis: " + _chartType);
+        _zAxis = label;
+        return _zAxis;
+    }
+
+
 }

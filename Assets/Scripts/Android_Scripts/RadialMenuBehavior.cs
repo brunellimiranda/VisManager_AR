@@ -11,21 +11,29 @@ public class RadialMenuBehavior : MonoBehaviour
 {
     private Manager m;
     public GameObject[] fatias;
+
     
-    private int _totalPages = 0;
-    private int _currentPage = 0;
+    private int _totalPages;
+    private int _currentPage;
     private Dictionary<int, List<string>> _pagesValues = new Dictionary<int, List<string>>();
     private List<string> _options;
+
+    private List<string> _selectedOptions;
+
     private void Start()
     {
         m = GameObject.Find("LogicManager").GetComponent<Manager>();
-        _pagesValues.Add(0, new List<string>
+        _selectedOptions = new List<string>();
+        if (_pagesValues.Count == 0)
         {
-            "option", "option", "option", 
-            "option", "option", "option", 
-            "option", "option", "option", 
-            "option", "option", "option"
-        });
+            _pagesValues.Add(0, new List<string>
+            {
+                "option", "option", "option", 
+                "option", "option", "option", 
+                "option", "option", "option", 
+                "option", "option", "option"
+            });    
+        }
     }
     
     
@@ -64,6 +72,7 @@ public class RadialMenuBehavior : MonoBehaviour
         
         List<string> options = _pagesValues[_currentPage];
         
+        
         for (int i = 0; i < options.Count; i++)
         {
             fatias[i].GetComponentInChildren<Text>().text = options[i];
@@ -74,7 +83,6 @@ public class RadialMenuBehavior : MonoBehaviour
             }
             if (_totalPages == 0 && _currentPage == 0) fatias[11].gameObject.SetActive(false);
         }
-
 
         foreach (GameObject fatia in fatias)
         {
@@ -99,4 +107,30 @@ public class RadialMenuBehavior : MonoBehaviour
         });
         UpdatePage(0);
     }
+
+    public void ChangeFatiaTag(string newTag)
+    {
+        foreach (GameObject f in fatias)
+        {
+            f.tag = newTag;
+        }
+    }
+    public List<string> GetSelected()
+    {
+        return _selectedOptions;
+    }
+
+    public void AddNewSelected(string option)
+    {
+        if (!_selectedOptions.Contains(option))
+        {
+            _selectedOptions.Add(option);
+        }
+    }
+
+    public void ClearSelectedOptions()
+    {
+        _selectedOptions = new List<string>();
+    }
+    
 }
