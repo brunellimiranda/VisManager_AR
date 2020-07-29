@@ -9,6 +9,7 @@ public class Manager : MonoBehaviour
     // ===== dataset ===== //
     public string url_path;
     private string datasetLoaded;
+    public bool datasetReady;
 
     // ===== attributes ===== //
     private string[] _attributes;
@@ -22,11 +23,12 @@ public class Manager : MonoBehaviour
     // ===== filtro ===== //
     private string _filter;
     
-    public bool datasetReady;
-
+    // ==== Visualizations ==== //
     private Dictionary<int, string> _activeVisualizations = new Dictionary<int, string>();
     private bool _hasSelectedVis = false;
 
+    // ==== State ==== //
+    private string _state; 
     
     public List<string> GetCategoricAttributes()
     {
@@ -192,5 +194,15 @@ public class Manager : MonoBehaviour
     {
         GameObject.Find("Filter_Target").GetComponent<AR_FilterManager>().DestroyAllFilters();
         _filter = "";
+    }
+
+    public void SaveState(string requisition)
+    {
+        _state = requisition;
+    }
+
+    public string LoadState()
+    {
+        return _state;
     }
 }

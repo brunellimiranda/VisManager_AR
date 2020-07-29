@@ -34,6 +34,12 @@ public class AR_ChartGenerator : MonoBehaviour
         StartCoroutine(GetRequest(url));
     }
 
+    public void GetChart(string requisition)
+    {
+        print("Load State with Request Chart " + requisition);
+        StartCoroutine(GetRequest(requisition));
+    }
+
     IEnumerator GetRequest(string uri)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
