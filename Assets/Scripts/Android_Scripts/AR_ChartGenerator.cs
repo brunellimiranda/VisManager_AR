@@ -37,7 +37,7 @@ public class AR_ChartGenerator : MonoBehaviour
     public void GetChart(string requisition)
     {
         print("Load State with Request Chart " + requisition);
-        StartCoroutine(GetRequest(requisition));
+        GenerateViz(requisition);
     }
 
     IEnumerator GetRequest(string uri)

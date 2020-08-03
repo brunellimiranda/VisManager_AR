@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="VisualizationCardv2" size="1.000000 1.415045" />
+    <ImageTarget name="VisualizationCard" size="1.000000 1.415045" />
+    <ImageTarget name="SelectDataset" size="1.000000 1.415045" />
+    <ImageTarget name="SaveCard" size="1.000000 1.415045" />
+    <ImageTarget name="LoadCard" size="1.000000 1.415045" />
+    <ImageTarget name="FilterCard" size="1.000000 1.415045" />
+    <ImageTarget name="AxisCard" size="1.000000 1.415045" />
+    <ImageTarget name="ClearCard" size="1.000000 1.415045" />
+  </Tracking>
+</QCARConfig>

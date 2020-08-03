@@ -43,7 +43,7 @@ public class ChartManager : DefaultTrackableEventHandler
         _m = GameObject.Find("LogicManager").GetComponent<Manager>();
         _rm = GetComponentInChildren<RadialMenuBehavior>();
     }
-    
+
     protected override void OnTrackingFound()
     {
         base.OnTrackingFound();
@@ -56,7 +56,13 @@ public class ChartManager : DefaultTrackableEventHandler
             if (_visSelected)
             {
                 _rm.gameObject.SetActive(false);
-                if (_xAxis == "" || _yAxis == "" || _zAxis == "") SetDefaultAxis();
+                if (_xAxis == "" || _yAxis == "" || _zAxis == "")
+                {
+                    SetDefaultAxis();
+                    GenerateChart();
+                    print(_defaultX);
+                    return;
+                }
                 GenerateChart();
             }
             else
@@ -81,7 +87,7 @@ public class ChartManager : DefaultTrackableEventHandler
         {
             case 2:
                 
-                if (_chartType == "parallel_coordinates") _xAxis = _xAxis.Substring(0, _xAxis.Length-1);
+                //if (_chartType == "parallel_coordinates") _xAxis = _xAxis.Substring(0, _xAxis.Length-1);
                 title = _chartType == "parallel_coordinates" ? "Parallel Coordinates" : _xAxis + " x " + _yAxis;
                 
                 GetComponentInChildren<AR_ChartGenerator>().
@@ -170,7 +176,11 @@ public class ChartManager : DefaultTrackableEventHandler
                        _defaultX = _datasetAtt[i];
                        fold += _defaultX;
                        cont++;
-                       if(cont == 3 && cat == 1) break;
+                       if (cont == 3 && cat == 1)
+                       {
+                           _defaultX = fold;
+                           break;
+                       }
                        fold += ";";
                    }
                                       
@@ -202,6 +212,8 @@ public class ChartManager : DefaultTrackableEventHandler
                 }
                 break;
         }
+
+        GenerateChart();
     }
 
     public void SetVisType(string vis)
