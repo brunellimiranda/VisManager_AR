@@ -32,6 +32,10 @@ public class ChartManager : DefaultTrackableEventHandler
     private int _selectedDimensions = 0;
     
     private bool _visSelected = false;
+
+    public bool _isTest = true;
+    public string _request;
+    
     
     // Dimentions are:
     // X - Categoric (c)
@@ -51,6 +55,12 @@ public class ChartManager : DefaultTrackableEventHandler
         _serverPath = _m.GetUrlPath();
         _datasetName = _m.GetDatasetLoaded();
 
+        if (_isTest)
+        {
+            GetComponentInChildren<AR_ChartGenerator>().GetChart2(_request);
+            return;
+        }
+        
         if (!string.IsNullOrEmpty(_datasetName))
         {
             if (_visSelected)
