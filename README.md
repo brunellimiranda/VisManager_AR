@@ -1,5 +1,7 @@
 # ARCardVis
  Mobile Augemented Reality project using card-based interactions.
+ 
+ Video showcase [here](https://youtu.be/yB1vanSJj_o)
 
 # Requirements
 - [Unity engine](https://unity3d.com/pt/get-unity/download/archive) (to edit the project, version 2019.2.20 or latter)
