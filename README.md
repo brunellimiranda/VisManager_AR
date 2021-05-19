@@ -6,3 +6,4 @@
 - Download Android Apk (if you just want to use the app): https://drive.google.com/file/d/1J2xpqoG2sA9Zr-icBVMCyZDnS8ncrVQR/view?usp=sharing
 - Cards (if you want to print them): https://drive.google.com/file/d/1zVyonivpYbbAv9LryovjJDVoga4zgap0/view?usp=sharing 
 - Virtual Gallery (if you want to use a digital version of the cards): https://tiagodavi70.github.io/cards_gallery/
+- VizGen (to generate the visualizations): https://github.com/tiagodavi70/VizGen
